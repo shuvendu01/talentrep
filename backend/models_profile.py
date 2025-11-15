@@ -27,16 +27,33 @@ class Education(BaseModel):
     end_year: Optional[int] = None
     grade: Optional[str] = None
 
+class Project(BaseModel):
+    name: str
+    description: Optional[str] = None
+    technologies: List[str] = []
+    url: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
+
+class ProfileTheme(BaseModel):
+    template: str = "modern"  # modern, professional, creative, minimal
+    primary_color: str = "#2563eb"  # blue
+    secondary_color: str = "#10b981"  # green
+    font_family: str = "Inter"  # Inter, Roboto, Poppins, Merriweather
+
 class JobSeekerProfile(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     user_id: str
+    profile_image_url: Optional[str] = None
     full_name: str
     headline: Optional[str] = None
+    professional_summary: Optional[str] = None
     about: Optional[str] = None
     location: str
     skills: List[Skill] = []
     experience: List[Experience] = []
     education: List[Education] = []
+    projects: List[Project] = []
     resume_url: Optional[str] = None
     resume_original_url: Optional[str] = None  # For admin access
     total_experience_years: float = 0
@@ -45,6 +62,7 @@ class JobSeekerProfile(BaseModel):
     overall_rating: Optional[float] = None
     verification_count: int = 0
     is_profile_complete: bool = False
+    theme: ProfileTheme = Field(default_factory=ProfileTheme)
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
