@@ -1106,6 +1106,24 @@ class CreditSystemTester:
         
         headers = {"Authorization": f"Bearer {self.employer_token}"}
         
+        # First ensure employer profile exists
+        employer_profile_data = {
+            "company_name": "TechCorp Solutions",
+            "contact_person_name": "Sarah Johnson",
+            "contact_person_designation": "HR Manager",
+            "industry": "Technology",
+            "company_size": "51-200",
+            "company_website": "https://techcorp.com",
+            "location": "San Francisco, CA",
+            "about": "Leading technology solutions provider"
+        }
+        
+        # Try to create profile (might already exist)
+        profile_response = requests.post(f"{API_BASE}/profiles/employer/profile", json=employer_profile_data, headers=headers)
+        if profile_response.status_code not in [200, 400]:  # 400 means already exists
+            log_error(f"Employer profile creation failed: {profile_response.text}")
+            return False
+        
         job_data = {
             "job_title": "Senior Full Stack Developer",
             "description": "We are looking for an experienced full stack developer to join our team.",
