@@ -144,30 +144,23 @@ export default function AdminNotificationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center gap-4">
-              <Link href="/admin/dashboard" className="text-gray-600 hover:text-blue-600">
-                <ArrowLeft className="h-6 w-6" />
-              </Link>
-              <h1 className="text-2xl font-bold text-gray-900">Notification Banners</h1>
-            </div>
-            <button
-              onClick={() => { resetForm(); setShowModal(true); }}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
-            >
-              <Plus className="h-5 w-5" />
-              Create Notification
-            </button>
+    <AdminLayout>
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Notification Banners
+            </h1>
+            <p className="text-gray-400">Manage platform notifications</p>
           </div>
+          <button
+            onClick={() => { resetForm(); setShowModal(true); }}
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 flex items-center gap-2 shadow-lg shadow-blue-500/50"
+          >
+            <Plus className="h-5 w-5" />
+            Create Notification
+          </button>
         </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Message */}
         {message.text && (
           <div className={`mb-6 p-4 rounded-lg ${
