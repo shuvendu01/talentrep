@@ -877,6 +877,9 @@ video {
 .mt-auto {
   margin-top: auto;
 }
+.mt-3 {
+  margin-top: 0.75rem;
+}
 .block {
   display: block;
 }
@@ -1755,6 +1758,9 @@ video {
 .bg-yellow-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/95 {
+  background-color: rgb(0 0 0 / 0.95);
 }
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
@@ -3769,6 +3775,14 @@ html {
 
   .lg\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+
+  .lg\:block {
+    display: block;
+  }
+
+  .lg\:hidden {
+    display: none;
   }
 
   .lg\:min-w-\[180px\] {

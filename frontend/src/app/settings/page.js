@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import api from '@/lib/api';
-import Link from 'next/link';
-import { Settings, Save, Bell, Lock, Eye, EyeOff } from 'lucide-react';
+import JobSeekerLayout from '@/components/JobSeekerLayout';
+import { Settings as SettingsIcon, Save, Bell, Lock, DollarSign, MapPin, Briefcase } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function SettingsPage() {
@@ -17,8 +17,11 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState({
     email_notifications: true,
     profile_visibility: 'public',
-    preferred_locations: [],
-    preferred_positions: [],
+    preferred_locations: '',
+    preferred_positions: '',
+    expected_salary: '',
+    current_salary: '',
+    notice_period: '',
     job_alerts: true,
     application_alerts: true
   });
