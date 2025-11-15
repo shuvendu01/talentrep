@@ -1107,18 +1107,16 @@ class CreditSystemTester:
         headers = {"Authorization": f"Bearer {self.employer_token}"}
         
         job_data = {
-            "title": "Senior Full Stack Developer",
+            "job_title": "Senior Full Stack Developer",
             "description": "We are looking for an experienced full stack developer to join our team.",
             "required_skills": ["Python", "React", "MongoDB"],
             "min_experience": 3,
             "max_experience": 8,
             "location": "Remote",
-            "education_required": "Bachelor",
             "job_type": "full_time",
             "work_mode": "remote",
-            "salary_min": 80000,
-            "salary_max": 120000,
-            "company_name": "TechCorp Solutions"
+            "min_salary": 80000,
+            "max_salary": 120000
         }
         
         response = requests.post(f"{API_BASE}/jobs/jobs", json=job_data, headers=headers)
