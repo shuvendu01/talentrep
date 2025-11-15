@@ -19,11 +19,15 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Import routes after setting up database
-from routes import auth, profile, jobs
+from routes import auth, profile, jobs, credits, contact_reveal, interviews, admin
 # Inject database connection into route modules
 auth.db = db
 profile.db = db
 jobs.db = db
+credits.db = db
+contact_reveal.db = db
+interviews.db = db
+admin.db = db
 
 # Create the main app without a prefix
 app = FastAPI(title="TalentHub API", version="1.0.0")
@@ -89,6 +93,18 @@ api_router.include_router(profile.router, prefix="/profiles", tags=["Profiles"])
 
 # Include job routes
 api_router.include_router(jobs.router, prefix="/jobs", tags=["Jobs"])
+
+# Include credit routes
+api_router.include_router(credits.router, prefix="/credits", tags=["Credits"])
+
+# Include contact reveal routes
+api_router.include_router(contact_reveal.router, prefix="/contacts", tags=["Contact Reveal"])
+
+# Include interview routes
+api_router.include_router(interviews.router, prefix="/interviews", tags=["Interviews"])
+
+# Include admin routes
+api_router.include_router(admin.router, prefix="/admin", tags=["Admin"])
 
 # Include the router in the main app
 app.include_router(api_router)
