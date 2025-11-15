@@ -325,6 +325,64 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
+      </div>
+    </JobSeekerLayout>
+    );
+  }
+
+  // Default layout for other roles (employer, interviewer, admin)
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2">
+            <Briefcase className="h-8 w-8 text-blue-600" />
+            <span className="text-2xl font-bold text-gray-900">TalentHub</span>
+          </Link>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 px-4 py-2 bg-blue-50 rounded-lg">
+              <Coins className="h-5 w-5 text-blue-600" />
+              <span className="font-medium text-gray-900">{user?.credits_free + user?.credits_paid || 0}</span>
+              <span className="text-sm text-gray-600">credits</span>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 text-gray-600 hover:text-red-600 transition-colors"
+            >
+              <LogOut className="h-5 w-5" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-8">
+        {/* Welcome Section */}
+        <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-8 text-white mb-8">
+          <h1 className="text-4xl font-bold mb-2">Welcome back!</h1>
+          <p className="text-blue-100 text-lg">{user?.email}</p>
+          <div className="mt-4 inline-flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-lg">
+            <Award className="h-5 w-5" />
+            <span className="capitalize">{user?.role}</span>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="bg-white rounded-xl p-6 border border-gray-200">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Link
+              href="/settings"
+              className="p-6 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-colors group"
+            >
+              <Settings className="h-8 w-8 text-blue-600 mb-3" />
+              <h3 className="font-semibold text-gray-900 mb-1">Settings</h3>
+              <p className="text-sm text-gray-600">Manage your account</p>
+            </Link>
+          </div>
+        </div>
       </main>
     </div>
   );
