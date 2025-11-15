@@ -354,6 +354,14 @@ export default function EmployerJobsPage() {
                       </button>
                       
                       <Link
+                        href={`/employer/ats-ranking?job_id=${job.id}`}
+                        className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:opacity-90 transition-all flex items-center justify-center gap-2 text-sm font-semibold"
+                      >
+                        <Award className="h-4 w-4" />
+                        ATS Ranking
+                      </Link>
+                      
+                      <Link
                         href={`/jobs/${job.id}`}
                         className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 text-sm font-semibold"
                       >
