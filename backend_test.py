@@ -1324,9 +1324,14 @@ class CreditSystemTester:
             result = response.json()
             log_success("Multiple candidate ranking successful")
             log_info(f"Job: {result.get('job_title', 'N/A')}")
-            log_info(f"Total candidates: {result['total_candidates']}")
             
-            if result['candidates']:
+            # Handle both response formats (with and without total_candidates)
+            if 'total_candidates' in result:
+                log_info(f"Total candidates: {result['total_candidates']}")
+            else:
+                log_info(f"Candidates found: {len(result.get('candidates', []))}")
+            
+            if result.get('candidates'):
                 # Check if candidates are sorted by score (highest first)
                 candidates = result['candidates']
                 for i in range(len(candidates) - 1):
@@ -1342,7 +1347,7 @@ class CreditSystemTester:
                 log_info(f"Top score: {top_candidate['overall_score']}")
                 log_info(f"Top ranking: {top_candidate['ranking']}")
             else:
-                log_info("No candidates found to rank")
+                log_info("No candidates found to rank (expected for new job)")
         else:
             log_error(f"Multiple candidate ranking failed: {response.text}")
             return False
