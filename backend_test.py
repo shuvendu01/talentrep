@@ -48,6 +48,7 @@ class CreditSystemTester:
         self.job_seeker_user_id = None
         self.interviewer_user_id = None
         self.test_interview_request_id = None
+        self.test_job_id = None
         
     def create_test_users(self):
         """Create test users for all roles"""
