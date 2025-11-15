@@ -18,10 +18,11 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Import auth routes after setting up database
-from routes import auth
-# Inject database connection into auth module
+# Import routes after setting up database
+from routes import auth, profile
+# Inject database connection into route modules
 auth.db = db
+profile.db = db
 
 # Create the main app without a prefix
 app = FastAPI(title="TalentHub API", version="1.0.0")
