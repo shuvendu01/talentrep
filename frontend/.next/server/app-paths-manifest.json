@@ -1,7 +1,6 @@
 {
-  "/interviewer/dashboard/page": "app/interviewer/dashboard/page.js",
-  "/interviewers/page": "app/interviewers/page.js",
-  "/interviewer/profile/page": "app/interviewer/profile/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/page": "app/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/profile/page": "app/profile/page.js"
 }
