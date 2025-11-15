@@ -29,6 +29,9 @@ export default function Home() {
             <Link href="/companies" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
               Companies
             </Link>
+            <Link href="/pricing" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+              Pricing
+            </Link>
             <Link href="/interviewers" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
               Become Interviewer
             </Link>
