@@ -4,7 +4,7 @@
 
 ### Backend API Test (Confirmed Working)
 ```bash
-curl -X POST https://hireme-portal-6.preview.emergentagent.com/api/auth/register \
+curl -X POST https://careerlink-52.preview.emergentagent.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email": "test@example.com", "role": "jobseeker"}'
 ```
@@ -25,7 +25,7 @@ curl -X POST https://hireme-portal-6.preview.emergentagent.com/api/auth/register
 ## How to Register via Frontend
 
 1. **Visit Registration Page:**
-   - Go to: `https://hireme-portal-6.preview.emergentagent.com/auth/register`
+   - Go to: `https://careerlink-52.preview.emergentagent.com/auth/register`
 
 2. **Fill the Form:**
    - Select Role: Job Seeker, Employer, or Interviewer
