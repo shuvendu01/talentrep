@@ -163,7 +163,7 @@ async def forgot_password(magic_link_request: MagicLinkRequest):
     Request a password reset magic link
     """
     # Find user by email
-    user_data = await db.users.find_one({'email': magic_link_request.email})
+    user_data = await db.users.find_one({'email': magic_link_request.email}, {'_id': 0})
     
     if not user_data:
         raise HTTPException(status_code=404, detail='User not found')
