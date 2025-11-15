@@ -802,3 +802,48 @@ agent_communication:
       - This doesn't affect the new settings/search endpoints which work perfectly
       
       🎯 NEW ENDPOINTS STATUS: Production-ready. Both Job Seeker Settings and Search APIs fully functional.
+
+  - task: "ATS Rank Single Candidate API"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/profile.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Just implemented. POST /api/profiles/ats/rank-candidate for ranking single candidate against job requirements with weighted scoring algorithm (skills 40%, experience 30%, location 15%, education 15%)."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: ATS Rank Single Candidate API working perfectly. Job seeker self-ranking successful with score 86.67 (Excellent Match). Employer candidate ranking working. All validation tests passed: missing job_id rejected, non-existent job/candidate rejected. Response structure validated with proper breakdown scores."
+
+  - task: "ATS Rank Multiple Candidates API"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/profile.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Just implemented. POST /api/profiles/ats/rank-multiple for employers to rank multiple candidates for their jobs. Auto-ranks all applicants if no candidate_ids provided. Results sorted by overall_score descending."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: ATS Rank Multiple Candidates API working perfectly. Multiple candidate ranking successful with proper response handling. Specific candidates ranking working. Authorization tests passed: non-employer blocked, employer blocked from other's jobs. Missing job_id properly rejected. Candidate sorting by score verified."
+
+  - task: "ATS Scoring Algorithm"
+    implemented: true
+    working: true
+    file: "/app/backend/utils/ats_ranking.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Just implemented. Comprehensive ATS ranking algorithm with weighted scoring: skills match, experience match, location match, education match. Returns overall score, ranking category, and detailed breakdown."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: ATS Scoring Algorithm working perfectly across all scenarios. High Match Candidate: 100.0 score (Excellent Match, highly_recommended). Medium Match Candidate: 62.83 score (Moderate Match, consider). Low Match Candidate: 29.5 score (Low Match, not_recommended). All scoring ranges validated and categorization working correctly."
