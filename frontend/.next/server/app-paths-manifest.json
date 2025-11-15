@@ -1,13 +1,9 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/auth/forgot-password/page": "app/auth/forgot-password/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
   "/settings/page": "app/settings/page.js",
   "/profile/page": "app/profile/page.js",
-  "/auth/login/jobseeker/page": "app/auth/login/jobseeker/page.js",
-  "/auth/login/employer/page": "app/auth/login/employer/page.js",
-  "/auth/login/interviewer/page": "app/auth/login/interviewer/page.js",
   "/auth/login/admin/page": "app/auth/login/admin/page.js",
-  "/auth/register/page": "app/auth/register/page.js"
+  "/auth/register/page": "app/auth/register/page.js",
+  "/search-talent/page": "app/search-talent/page.js"
 }
