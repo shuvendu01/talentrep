@@ -63,16 +63,10 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="bg-white/5 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">TalentHub</Link>
-          <Link href="/dashboard" className="text-gray-300 hover:text-white">Dashboard</Link>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-white mb-8">Settings</h1>
+    <JobSeekerLayout>
+      <div className="p-8">
+        <h1 className="text-4xl font-bold text-white mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Settings</h1>
+        <p className="text-gray-400 mb-8">Manage your preferences and job expectations</p>
 
         {message.text && (
           <div className={cn('mb-6 p-4 rounded-lg', message.type === 'success' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400')}>
