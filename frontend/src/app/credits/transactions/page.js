@@ -79,6 +79,6 @@ export default function TransactionsPage() {
           )}
         </div>
       </div>
-    </div>
+    </JobSeekerLayout>
   );
 }
