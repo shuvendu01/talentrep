@@ -396,6 +396,36 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ TESTED: Delete job API working correctly. Successfully deletes job and verifies deletion. Proper authorization ensures employers can only delete their own jobs."
+        
+  - task: "Job Seeker Settings API"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/profile.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Just implemented. GET/PUT /api/profiles/jobseeker/settings for job seeker settings management (expected_salary, current_salary, notice_period, preferred_locations, preferred_positions)."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Job Seeker Settings API working perfectly. GET endpoint retrieves settings correctly, PUT endpoint updates settings successfully. Settings fields include expected_salary, current_salary, notice_period, preferred_locations, preferred_positions, job_search_status, willing_to_relocate. Role-based access control working - only job seekers can access/update settings."
+        
+  - task: "Job Seeker Search API (Employer Feature)"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/profile.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Just implemented. GET /api/profiles/jobseeker/search for employers to search job seekers with comprehensive filters (query, location, experience, skills, verified_only, sort_by) and pagination."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Job Seeker Search API working perfectly. All search filters working correctly: query (name/position/company), location, experience range (min/max), skills, verified_only flag. Pagination working with page/limit parameters. Sort options (relevance, experience, recent) all functional. Email addresses included in results for employers. Role-based access control working - only employers can search talent, job seekers and interviewers correctly blocked."
 
 frontend:
   - task: "Job Search & Listings Page"
