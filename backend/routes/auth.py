@@ -209,7 +209,7 @@ async def verify_magic_link(token: str):
     Verify magic link token and authenticate user
     """
     # Find user by magic link token
-    user_data = await db.users.find_one({'magic_link_token': token})
+    user_data = await db.users.find_one({'magic_link_token': token}, {'_id': 0})
     
     if not user_data:
         raise HTTPException(status_code=400, detail='Invalid or expired magic link')
