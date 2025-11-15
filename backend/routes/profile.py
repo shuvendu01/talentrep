@@ -527,3 +527,113 @@ async def update_jobseeker_settings(
     )
     
     return {'message': 'Settings updated successfully'}
+
+# ==================== ATS Ranking ====================
+
+@router.post('/ats/rank-candidate')
+async def rank_candidate_for_job(
+    data: dict,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Calculate ATS ranking for a candidate against a job
+    Requires: job_id, candidate_id (or uses current user if job seeker)
+    """
+    from utils.ats_ranking import calculate_ats_ranking
+    
+    job_id = data.get('job_id')
+    candidate_id = data.get('candidate_id', current_user.id if current_user.role == UserRole.JOB_SEEKER else None)
+    
+    if not job_id:
+        raise HTTPException(status_code=400, detail='job_id is required')
+    
+    if not candidate_id:
+        raise HTTPException(status_code=400, detail='candidate_id is required')
+    
+    # Fetch job data
+    job = await db.jobs.find_one({'id': job_id}, {'_id': 0})
+    if not job:
+        raise HTTPException(status_code=404, detail='Job not found')
+    
+    # Fetch candidate profile
+    candidate = await db.jobseeker_profiles.find_one({'user_id': candidate_id}, {'_id': 0})
+    if not candidate:
+        raise HTTPException(status_code=404, detail='Candidate profile not found')
+    
+    # Calculate ATS ranking
+    ranking_result = calculate_ats_ranking(job, candidate)
+    
+    return {
+        'job_id': job_id,
+        'candidate_id': candidate_id,
+        'job_title': job.get('title'),
+        'candidate_name': f"{candidate.get('first_name', '')} {candidate.get('last_name', '')}".strip(),
+        **ranking_result
+    }
+
+@router.post('/ats/rank-multiple')
+async def rank_multiple_candidates(
+    data: dict,
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Rank multiple candidates for a job (employer feature)
+    Requires: job_id, candidate_ids (optional, if not provided ranks all applicants)
+    """
+    from utils.ats_ranking import calculate_ats_ranking
+    
+    if current_user.role != UserRole.EMPLOYER:
+        raise HTTPException(status_code=403, detail='Only employers can use this feature')
+    
+    job_id = data.get('job_id')
+    if not job_id:
+        raise HTTPException(status_code=400, detail='job_id is required')
+    
+    # Fetch job data
+    job = await db.jobs.find_one({'id': job_id}, {'_id': 0})
+    if not job:
+        raise HTTPException(status_code=404, detail='Job not found')
+    
+    # Verify job belongs to employer
+    if job.get('employer_id') != current_user.id:
+        raise HTTPException(status_code=403, detail='You can only rank candidates for your own jobs')
+    
+    # Get candidate IDs
+    candidate_ids = data.get('candidate_ids', [])
+    
+    # If no specific candidates, get all applicants for this job
+    if not candidate_ids:
+        applications = await db.applications.find({'job_id': job_id}, {'_id': 0, 'jobseeker_id': 1}).to_list(1000)
+        candidate_ids = [app['jobseeker_id'] for app in applications]
+    
+    if not candidate_ids:
+        return {
+            'job_id': job_id,
+            'job_title': job.get('title'),
+            'candidates': [],
+            'message': 'No candidates to rank'
+        }
+    
+    # Rank all candidates
+    ranked_candidates = []
+    for candidate_id in candidate_ids:
+        candidate = await db.jobseeker_profiles.find_one({'user_id': candidate_id}, {'_id': 0})
+        if candidate:
+            ranking_result = calculate_ats_ranking(job, candidate)
+            ranked_candidates.append({
+                'candidate_id': candidate_id,
+                'candidate_name': f"{candidate.get('first_name', '')} {candidate.get('last_name', '')}".strip(),
+                'current_position': candidate.get('current_position'),
+                'experience_years': candidate.get('experience_years'),
+                **ranking_result
+            })
+    
+    # Sort by overall score (highest first)
+    ranked_candidates.sort(key=lambda x: x['overall_score'], reverse=True)
+    
+    return {
+        'job_id': job_id,
+        'job_title': job.get('title'),
+        'total_candidates': len(ranked_candidates),
+        'candidates': ranked_candidates
+    }
