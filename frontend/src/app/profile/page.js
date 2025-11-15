@@ -323,14 +323,10 @@ export default function JobSeekerProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <Briefcase className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">TalentHub</span>
-          </Link>
+    <JobSeekerLayout>
+      <div className="p-8">
+        {/* Theme Customizer Button */}
+        <div className="mb-6 flex justify-end">
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowThemeCustomizer(!showThemeCustomizer)}
