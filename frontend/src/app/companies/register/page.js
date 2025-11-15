@@ -25,13 +25,18 @@ export default function CompanyRegisterPage() {
     setError('');
 
     try {
-      await api.post('/auth/register', formData);
+      console.log('Submitting registration:', { ...formData, password: '***' });
+      const response = await api.post('/auth/register', formData);
+      console.log('Registration successful:', response.data);
       setSuccess(true);
       setTimeout(() => {
         router.push('/auth/login');
       }, 2000);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to register');
+      console.error('Registration error:', err);
+      console.error('Error response:', err.response);
+      const errorMessage = err.response?.data?.detail || err.message || 'Failed to register';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
