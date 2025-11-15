@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/lib/api';
+import PhoneInput from '@/components/PhoneInput';
 import { Award, Mail, Phone, Loader2, CheckCircle2, AlertCircle, Lock, Eye, EyeOff } from 'lucide-react';
 
 export default function InterviewerRegisterPage() {
