@@ -87,12 +87,12 @@ async def register(user_data: UserCreate):
         from models import CreditTransaction, CreditType
         transaction = CreditTransaction(
             user_id=user.id,
-            amount=bonus_config['signup_bonus'],
+            amount=signup_bonus,
             credit_type=CreditType.FREE,
             transaction_type='bonus',
             description='Signup bonus'
         )
-        await db.credit_transactions.insert_one(transaction.dict())
+        await db.credit_transactions.insert_one(transaction.model_dump())
     
     return {
         'message': 'User registered successfully',
