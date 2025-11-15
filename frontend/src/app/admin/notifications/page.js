@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
-import Link from 'next/link';
-import { Bell, Plus, Edit, Trash2, ArrowLeft, X, Save, Calendar } from 'lucide-react';
+import AdminLayout from '@/components/admin/AdminLayout';
+import { Bell, Plus, Edit, Trash2, X, Save } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function AdminNotificationsPage() {
   const router = useRouter();
