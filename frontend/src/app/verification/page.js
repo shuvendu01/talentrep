@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import api from '@/lib/api';
+import JobSeekerLayout from '@/components/JobSeekerLayout';
 import Link from 'next/link';
 import { Award, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -44,15 +45,8 @@ export default function VerificationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div className="bg-white/5 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">TalentHub</Link>
-          <Link href="/dashboard" className="text-gray-300 hover:text-white">Dashboard</Link>
-        </div>
-      </div>
-
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <JobSeekerLayout>
+      <div className="p-8">
         <h1 className="text-4xl font-bold text-white mb-8">Skill Verification</h1>
 
         {!verification?.has_verification ? (
