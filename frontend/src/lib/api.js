@@ -32,13 +32,34 @@ api.interceptors.request.use(
   }
 );
 
-// Add response interceptor for better error handling
+// Add response interceptor for better error handling and session management
 api.interceptors.response.use(
   (response) => {
     console.log('API Response:', response.status, response.config.url);
     return response;
   },
-  (error) => {
+  async (error) => {
+    const originalRequest = error.config;
+    
+    // Handle 401 Unauthorized errors (expired token or invalid session)
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      
+      // Clear invalid token and redirect to login
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
+        
+        // Only redirect if not already on login/register pages
+        const publicPaths = ['/auth/login', '/auth/register', '/auth/verify', '/', '/auth/forgot-password'];
+        const currentPath = window.location.pathname;
+        
+        if (!publicPaths.some(path => currentPath.startsWith(path))) {
+          window.location.href = '/auth/login';
+        }
+      }
+    }
+    
     if (error.response) {
       // Server responded with error
       console.error('API Error Response:', error.response.status, error.response.data);
