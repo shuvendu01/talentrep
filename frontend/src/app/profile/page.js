@@ -985,11 +985,11 @@ export default function JobSeekerProfilePage() {
               </div>
             )}
           </div>
-        </main>
+        </div>
 
         {/* Theme Customizer Sidebar */}
         {showThemeCustomizer && (
-          <aside className="w-80 bg-white border-l p-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="w-80 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 mt-6">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-xl font-bold text-gray-900 flex items-center">
                 <Palette className="h-6 w-6 mr-2 text-blue-600" />
