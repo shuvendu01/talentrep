@@ -91,6 +91,62 @@ async def update_jobseeker_profile(
     
     return {'message': 'Profile updated successfully'}
 
+@router.post('/jobseeker/profile/image')
+async def upload_profile_image(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user)
+):
+    """Upload profile image"""
+    if not current_user or current_user.role != UserRole.JOB_SEEKER:
+        raise HTTPException(status_code=403, detail='Only job seekers can upload profile image')
+    
+    # Get profile
+    profile_data = await db.jobseeker_profiles.find_one({'user_id': current_user.id})
+    if not profile_data:
+        raise HTTPException(status_code=404, detail='Profile not found. Create profile first.')
+    
+    # Read file content
+    file_content = await file.read()
+    
+    # Validate file size (5MB max for images)
+    if len(file_content) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail='Image size must be less than 5MB')
+    
+    # Validate file type
+    allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+    if file.content_type not in allowed_types:
+        raise HTTPException(status_code=400, detail='Only JPEG, PNG, and WebP images are allowed')
+    
+    # Upload to S3
+    image_url = upload_file_to_s3(
+        file_content,
+        f"profile_{file.filename}",
+        file.content_type
+    )
+    
+    if not image_url:
+        raise HTTPException(status_code=500, detail='Failed to upload image')
+    
+    # Delete old profile image if exists
+    if profile_data.get('profile_image_url'):
+        delete_file_from_s3(profile_data['profile_image_url'])
+    
+    # Update profile with new image URL
+    await db.jobseeker_profiles.update_one(
+        {'user_id': current_user.id},
+        {
+            '$set': {
+                'profile_image_url': image_url,
+                'updated_at': datetime.utcnow()
+            }
+        }
+    )
+    
+    return {
+        'message': 'Profile image uploaded successfully',
+        'image_url': image_url
+    }
+
 @router.post('/jobseeker/profile/resume')
 async def upload_resume(
     file: UploadFile = File(...),
