@@ -87,6 +87,9 @@ api_router.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 # Include profile routes
 api_router.include_router(profile.router, prefix="/profiles", tags=["Profiles"])
 
+# Include job routes
+api_router.include_router(jobs.router, prefix="/jobs", tags=["Jobs"])
+
 # Include the router in the main app
 app.include_router(api_router)
 
