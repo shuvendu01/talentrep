@@ -3,8 +3,8 @@ from typing import Optional
 import os
 from datetime import datetime
 
-from models import User, UserCreate, MagicLinkRequest, UserRole, BonusConfig
-from utils.auth import generate_magic_token, create_access_token, decode_access_token
+from models import User, UserCreate, UserLogin, MagicLinkRequest, UserRole, BonusConfig
+from utils.auth import hash_password, verify_password, generate_magic_token, create_access_token, decode_access_token
 from utils.email import send_magic_link_email
 from utils.acl import check_permission
 
