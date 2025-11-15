@@ -118,7 +118,7 @@ async def login(login_data: UserLogin):
     Login with email and password
     """
     # Find user by email
-    user_data = await db.users.find_one({'email': login_data.email})
+    user_data = await db.users.find_one({'email': login_data.email}, {'_id': 0})
     
     if not user_data:
         raise HTTPException(status_code=401, detail='Invalid email or password')
