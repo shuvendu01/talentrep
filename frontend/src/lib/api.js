@@ -34,9 +34,22 @@ api.interceptors.request.use(
 
 // Add response interceptor for better error handling
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('API Response:', response.status, response.config.url);
+    return response;
+  },
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    if (error.response) {
+      // Server responded with error
+      console.error('API Error Response:', error.response.status, error.response.data);
+    } else if (error.request) {
+      // Request made but no response
+      console.error('API No Response:', error.request);
+      console.error('Request URL:', error.config?.url);
+    } else {
+      // Error in request setup
+      console.error('API Request Setup Error:', error.message);
+    }
     return Promise.reject(error);
   }
 );
