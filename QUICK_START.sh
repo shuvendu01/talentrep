@@ -33,7 +33,7 @@ echo ""
 
 # Install Node.js and Yarn
 echo "Step 3/10: Installing Node.js and Yarn..."
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install nodejs -y
 npm install -g yarn
 echo "✓ Node.js and Yarn installed"
