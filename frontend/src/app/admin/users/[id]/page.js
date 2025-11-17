@@ -101,18 +101,18 @@ export default function AdminUserDetailPage() {
 
   if (loading) {
     return (
-      <div className=\"min-h-screen flex items-center justify-center\">
-        <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600\"></div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className=\"min-h-screen flex items-center justify-center\">
-        <div className=\"text-center\">
-          <h2 className=\"text-2xl font-bold text-gray-900 mb-2\">User not found</h2>
-          <Link href=\"/admin/users\" className=\"text-blue-600 hover:text-blue-700\">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">User not found</h2>
+          <Link href="/admin/users" className="text-blue-600 hover:text-blue-700">
             ← Back to users
           </Link>
         </div>
@@ -121,22 +121,22 @@ export default function AdminUserDetailPage() {
   }
 
   return (
-    <div className=\"min-h-screen bg-gray-50\">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className=\"bg-white border-b\">
-        <div className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">
-          <div className=\"flex justify-between items-center py-4\">
-            <div className=\"flex items-center gap-4\">
-              <Link href=\"/admin/users\" className=\"text-gray-600 hover:text-blue-600\">
-                <ArrowLeft className=\"h-6 w-6\" />
+      <div className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center gap-4">
+              <Link href="/admin/users" className="text-gray-600 hover:text-blue-600">
+                <ArrowLeft className="h-6 w-6" />
               </Link>
-              <h1 className=\"text-2xl font-bold text-gray-900\">User Details</h1>
+              <h1 className="text-2xl font-bold text-gray-900">User Details</h1>
             </div>
             <button
               onClick={() => setShowDonateModal(true)}
-              className=\"px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2\"
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
             >
-              <Gift className=\"h-5 w-5\" />
+              <Gift className="h-5 w-5" />
               Donate Credits
             </button>
           </div>
@@ -144,52 +144,52 @@ export default function AdminUserDetailPage() {
       </div>
 
       {/* Content */}
-      <div className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8\">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Message */}
         {message.text && (
           <div className={`mb-6 p-4 rounded-lg flex items-start gap-3 ${
             message.type === 'success' ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'
           }`}>
             {message.type === 'success' ? (
-              <CheckCircle className=\"h-5 w-5 mt-0.5\" />
+              <CheckCircle className="h-5 w-5 mt-0.5" />
             ) : (
-              <X className=\"h-5 w-5 mt-0.5\" />
+              <X className="h-5 w-5 mt-0.5" />
             )}
             <p>{message.text}</p>
           </div>
         )}
 
-        <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-6\">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* User Info */}
-          <div className=\"lg:col-span-2 space-y-6\">
+          <div className="lg:col-span-2 space-y-6">
             {/* Basic Info */}
-            <div className=\"bg-white rounded-lg shadow-md p-6\">
-              <h2 className=\"text-xl font-bold text-gray-900 mb-4\">Basic Information</h2>
-              <div className=\"space-y-3\">
-                <div className=\"flex items-center gap-3\">
-                  <Mail className=\"h-5 w-5 text-gray-400\" />
-                  <span className=\"text-gray-700\">{user.email}</span>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Basic Information</h2>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                  <span className="text-gray-700">{user.email}</span>
                 </div>
                 {user.phone && (
-                  <div className=\"flex items-center gap-3\">
-                    <Phone className=\"h-5 w-5 text-gray-400\" />
-                    <span className=\"text-gray-700\">{user.phone}</span>
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-gray-400" />
+                    <span className="text-gray-700">{user.phone}</span>
                   </div>
                 )}
-                <div className=\"flex items-center gap-3\">
-                  <User className=\"h-5 w-5 text-gray-400\" />
+                <div className="flex items-center gap-3">
+                  <User className="h-5 w-5 text-gray-400" />
                   <span className={`px-2 py-1 rounded-full text-sm font-semibold ${getRoleBadgeColor(user.role)}`}>
                     {user.role}
                   </span>
                 </div>
-                <div className=\"flex items-center gap-3\">
-                  <Calendar className=\"h-5 w-5 text-gray-400\" />
-                  <span className=\"text-gray-700\">Joined {new Date(user.created_at).toLocaleDateString()}</span>
+                <div className="flex items-center gap-3">
+                  <Calendar className="h-5 w-5 text-gray-400" />
+                  <span className="text-gray-700">Joined {new Date(user.created_at).toLocaleDateString()}</span>
                 </div>
                 {user.last_login && (
-                  <div className=\"flex items-center gap-3\">
-                    <Calendar className=\"h-5 w-5 text-gray-400\" />
-                    <span className=\"text-gray-700\">Last login: {new Date(user.last_login).toLocaleDateString()}</span>
+                  <div className="flex items-center gap-3">
+                    <Calendar className="h-5 w-5 text-gray-400" />
+                    <span className="text-gray-700">Last login: {new Date(user.last_login).toLocaleDateString()}</span>
                   </div>
                 )}
               </div>
@@ -197,34 +197,34 @@ export default function AdminUserDetailPage() {
 
             {/* Profile Info */}
             {profile && (
-              <div className=\"bg-white rounded-lg shadow-md p-6\">
-                <h2 className=\"text-xl font-bold text-gray-900 mb-4\">Profile Information</h2>
-                <div className=\"space-y-3\">
+              <div className="bg-white rounded-lg shadow-md p-6">
+                <h2 className="text-xl font-bold text-gray-900 mb-4">Profile Information</h2>
+                <div className="space-y-3">
                   {profile.first_name && (
                     <div>
-                      <span className=\"text-sm font-medium text-gray-500\">Name:</span>
-                      <p className=\"text-gray-900\">{profile.first_name} {profile.last_name}</p>
+                      <span className="text-sm font-medium text-gray-500">Name:</span>
+                      <p className="text-gray-900">{profile.first_name} {profile.last_name}</p>
                     </div>
                   )}
                   {profile.company_name && (
-                    <div className=\"flex items-start gap-3\">
-                      <Building className=\"h-5 w-5 text-gray-400 mt-1\" />
+                    <div className="flex items-start gap-3">
+                      <Building className="h-5 w-5 text-gray-400 mt-1" />
                       <div>
-                        <span className=\"text-sm font-medium text-gray-500\">Company:</span>
-                        <p className=\"text-gray-900\">{profile.company_name}</p>
+                        <span className="text-sm font-medium text-gray-500">Company:</span>
+                        <p className="text-gray-900">{profile.company_name}</p>
                       </div>
                     </div>
                   )}
                   {profile.headline && (
                     <div>
-                      <span className=\"text-sm font-medium text-gray-500\">Headline:</span>
-                      <p className=\"text-gray-900\">{profile.headline}</p>
+                      <span className="text-sm font-medium text-gray-500">Headline:</span>
+                      <p className="text-gray-900">{profile.headline}</p>
                     </div>
                   )}
                   {profile.about && (
                     <div>
-                      <span className=\"text-sm font-medium text-gray-500\">About:</span>
-                      <p className=\"text-gray-700 whitespace-pre-line\">{profile.about}</p>
+                      <span className="text-sm font-medium text-gray-500">About:</span>
+                      <p className="text-gray-700 whitespace-pre-line">{profile.about}</p>
                     </div>
                   )}
                 </div>
@@ -232,23 +232,23 @@ export default function AdminUserDetailPage() {
             )}
 
             {/* Donation History */}
-            <div className=\"bg-white rounded-lg shadow-md p-6\">
-              <h2 className=\"text-xl font-bold text-gray-900 mb-4\">Credit Donation History</h2>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Credit Donation History</h2>
               {donations.length > 0 ? (
-                <div className=\"space-y-3\">
+                <div className="space-y-3">
                   {donations.map((donation) => (
-                    <div key={donation.id} className=\"border-l-4 border-green-500 pl-4 py-2\">
-                      <div className=\"flex justify-between items-start\">
+                    <div key={donation.id} className="border-l-4 border-green-500 pl-4 py-2">
+                      <div className="flex justify-between items-start">
                         <div>
-                          <div className=\"flex items-center gap-2 mb-1\">
-                            <Coins className=\"h-4 w-4 text-yellow-500\" />
-                            <span className=\"font-semibold text-gray-900\">+{donation.amount} credits</span>
+                          <div className="flex items-center gap-2 mb-1">
+                            <Coins className="h-4 w-4 text-yellow-500" />
+                            <span className="font-semibold text-gray-900">+{donation.amount} credits</span>
                           </div>
                           {donation.reason && (
-                            <p className=\"text-sm text-gray-600\">{donation.reason}</p>
+                            <p className="text-sm text-gray-600">{donation.reason}</p>
                           )}
                         </div>
-                        <span className=\"text-xs text-gray-500\">
+                        <span className="text-xs text-gray-500">
                           {new Date(donation.created_at).toLocaleDateString()}
                         </span>
                       </div>
@@ -256,32 +256,32 @@ export default function AdminUserDetailPage() {
                   ))}
                 </div>
               ) : (
-                <p className=\"text-gray-500 text-center py-4\">No donations yet</p>
+                <p className="text-gray-500 text-center py-4">No donations yet</p>
               )}
             </div>
           </div>
 
           {/* Sidebar */}
-          <div className=\"space-y-6\">
+          <div className="space-y-6">
             {/* Credits Card */}
-            <div className=\"bg-white rounded-lg shadow-md p-6\">
-              <h3 className=\"text-lg font-bold text-gray-900 mb-4 flex items-center gap-2\">
-                <Coins className=\"h-5 w-5 text-yellow-500\" />
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Coins className="h-5 w-5 text-yellow-500" />
                 Credit Balance
               </h3>
-              <div className=\"space-y-3\">
-                <div className=\"flex justify-between items-center\">
-                  <span className=\"text-gray-600\">Free Credits:</span>
-                  <span className=\"text-2xl font-bold text-green-600\">{user.credits_free || 0}</span>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Free Credits:</span>
+                  <span className="text-2xl font-bold text-green-600">{user.credits_free || 0}</span>
                 </div>
-                <div className=\"flex justify-between items-center\">
-                  <span className=\"text-gray-600\">Paid Credits:</span>
-                  <span className=\"text-2xl font-bold text-blue-600\">{user.credits_paid || 0}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Paid Credits:</span>
+                  <span className="text-2xl font-bold text-blue-600">{user.credits_paid || 0}</span>
                 </div>
-                <div className=\"pt-3 border-t border-gray-200\">
-                  <div className=\"flex justify-between items-center\">
-                    <span className=\"font-medium text-gray-900\">Total:</span>
-                    <span className=\"text-3xl font-bold text-gray-900\">
+                <div className="pt-3 border-t border-gray-200">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-900">Total:</span>
+                    <span className="text-3xl font-bold text-gray-900">
                       {(user.credits_free || 0) + (user.credits_paid || 0)}
                     </span>
                   </div>
@@ -290,19 +290,19 @@ export default function AdminUserDetailPage() {
             </div>
 
             {/* Status Card */}
-            <div className=\"bg-white rounded-lg shadow-md p-6\">
-              <h3 className=\"text-lg font-bold text-gray-900 mb-4\">Account Status</h3>
-              <div className=\"space-y-3\">
-                <div className=\"flex justify-between items-center\">
-                  <span className=\"text-gray-600\">Active:</span>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Account Status</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Active:</span>
                   <span className={`px-2 py-1 rounded text-sm font-semibold ${
                     user.is_active ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                   }`}>
                     {user.is_active ? 'Yes' : 'No'}
                   </span>
                 </div>
-                <div className=\"flex justify-between items-center\">
-                  <span className=\"text-gray-600\">Verified:</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Verified:</span>
                   <span className={`px-2 py-1 rounded text-sm font-semibold ${
                     user.is_verified ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
                   }`}>
@@ -313,18 +313,18 @@ export default function AdminUserDetailPage() {
             </div>
 
             {/* Quick Actions */}
-            <div className=\"bg-white rounded-lg shadow-md p-6\">
-              <h3 className=\"text-lg font-bold text-gray-900 mb-4\">Quick Actions</h3>
-              <div className=\"space-y-2\">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h3>
+              <div className="space-y-2">
                 <Link
                   href={`/admin/credits?user_id=${userId}`}
-                  className=\"block px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-center\"
+                  className="block px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-center"
                 >
                   View Transactions
                 </Link>
                 <button
                   onClick={() => setShowDonateModal(true)}
-                  className=\"w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700\"
+                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
                   Donate Credits
                 </button>
@@ -336,74 +336,74 @@ export default function AdminUserDetailPage() {
 
       {/* Donate Modal */}
       {showDonateModal && (
-        <div className=\"fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4\">
-          <div className=\"bg-white rounded-lg shadow-xl max-w-md w-full\">
-            <div className=\"p-6\">
-              <div className=\"flex justify-between items-center mb-6\">
-                <h2 className=\"text-2xl font-bold text-gray-900 flex items-center gap-2\">
-                  <Gift className=\"h-6 w-6\" />
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                  <Gift className="h-6 w-6" />
                   Donate Credits
                 </h2>
-                <button onClick={() => setShowDonateModal(false)} className=\"text-gray-400 hover:text-gray-600\">
-                  <X className=\"h-6 w-6\" />
+                <button onClick={() => setShowDonateModal(false)} className="text-gray-400 hover:text-gray-600">
+                  <X className="h-6 w-6" />
                 </button>
               </div>
 
-              <form onSubmit={handleDonate} className=\"space-y-4\">
+              <form onSubmit={handleDonate} className="space-y-4">
                 <div>
-                  <label className=\"block text-sm font-medium text-gray-700 mb-2\">Amount (Credits)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Amount (Credits)</label>
                   <input
-                    type=\"number\"
+                    type="number"
                     value={donateForm.amount}
                     onChange={(e) => setDonateForm({ ...donateForm, amount: parseInt(e.target.value) || 0 })}
-                    className=\"w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500\"
-                    min=\"1\"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    min="1"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className=\"block text-sm font-medium text-gray-700 mb-2\">Reason (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Reason (Optional)</label>
                   <textarea
                     value={donateForm.reason}
                     onChange={(e) => setDonateForm({ ...donateForm, reason: e.target.value })}
-                    className=\"w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500\"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     rows={3}
-                    placeholder=\"Promotional bonus, performance reward, etc.\"
+                    placeholder="Promotional bonus, performance reward, etc."
                   />
                 </div>
 
-                <div className=\"flex items-center gap-2\">
+                <div className="flex items-center gap-2">
                   <input
-                    type=\"checkbox\"
+                    type="checkbox"
                     checked={donateForm.send_notification}
                     onChange={(e) => setDonateForm({ ...donateForm, send_notification: e.target.checked })}
-                    className=\"rounded\"
+                    className="rounded"
                   />
-                  <span className=\"text-sm text-gray-700\">Send notification to user</span>
+                  <span className="text-sm text-gray-700">Send notification to user</span>
                 </div>
 
-                <div className=\"flex justify-end gap-4 pt-4\">
+                <div className="flex justify-end gap-4 pt-4">
                   <button
-                    type=\"button\"
+                    type="button"
                     onClick={() => setShowDonateModal(false)}
-                    className=\"px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50\"
+                    className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
                   >
                     Cancel
                   </button>
                   <button
-                    type=\"submit\"
+                    type="submit"
                     disabled={donating}
-                    className=\"px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2\"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                   >
                     {donating ? (
                       <>
-                        <div className=\"animate-spin rounded-full h-4 w-4 border-b-2 border-white\"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                         Donating...
                       </>
                     ) : (
                       <>
-                        <Gift className=\"h-4 w-4\" />
+                        <Gift className="h-4 w-4" />
                         Donate {donateForm.amount} Credits
                       </>
                     )}
