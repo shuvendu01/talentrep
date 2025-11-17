@@ -738,9 +738,6 @@ video {
 .top-1\/2 {
   top: 50%;
 }
-.top-16 {
-  top: 4rem;
-}
 .top-3\.5 {
   top: 0.875rem;
 }
@@ -969,9 +966,6 @@ video {
 }
 .h-\[1px\] {
   height: 1px;
-}
-.h-\[calc\(100vh-4rem\)\] {
-  height: calc(100vh - 4rem);
 }
 .h-\[var\(--radix-navigation-menu-viewport-height\)\] {
   height: var(--radix-navigation-menu-viewport-height);
