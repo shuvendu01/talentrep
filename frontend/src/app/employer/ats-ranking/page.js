@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Award, ArrowLeft, Users, TrendingUp, Loader2 } from 'lucide-react';
 import api from '@/lib/api';
 import ATSRankingCard from '@/components/ATSRankingCard';
 
-export default function ATSRankingPage() {
+function ATSRankingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams.get('job_id');
