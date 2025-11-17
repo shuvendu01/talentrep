@@ -184,3 +184,18 @@ function ATSRankingContent() {
     </div>
   );
 }
+
+export default function ATSRankingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 text-green-400 animate-spin mx-auto mb-4" />
+          <p className="text-white">Loading...</p>
+        </div>
+      </div>
+    }>
+      <ATSRankingContent />
+    </Suspense>
+  );
+}
