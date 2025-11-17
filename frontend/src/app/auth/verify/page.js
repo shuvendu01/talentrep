@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import api from '@/lib/api';
 import { Briefcase, Loader2, CheckCircle2, XCircle } from 'lucide-react';
 import Link from 'next/link';
 
-export default function VerifyPage() {
+function VerifyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState('verifying'); // verifying, success, error
@@ -106,5 +106,30 @@ export default function VerifyPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center px-4">
+        <div className="max-w-md w-full">
+          <div className="text-center mb-8">
+            <Link href="/" className="inline-flex items-center space-x-2 text-blue-600">
+              <Briefcase className="h-10 w-10" />
+              <span className="text-3xl font-bold">TalentHub</span>
+            </Link>
+          </div>
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            <div className="text-center py-8">
+              <Loader2 className="h-16 w-16 text-blue-600 animate-spin mx-auto mb-6" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Loading...</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <VerifyContent />
+    </Suspense>
   );
 }

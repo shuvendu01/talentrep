@@ -238,3 +238,7 @@ frontend/.next/static/chunks/*
 # Environment files
 *.env
 *.env.*
+-e 
+# Environment files
+*.env
+*.env.*

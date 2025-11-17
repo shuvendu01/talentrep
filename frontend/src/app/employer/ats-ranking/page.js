@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Award, ArrowLeft, Users, TrendingUp, Loader2 } from 'lucide-react';
 import api from '@/lib/api';
 import ATSRankingCard from '@/components/ATSRankingCard';
 
-export default function ATSRankingPage() {
+function ATSRankingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobId = searchParams.get('job_id');
@@ -182,5 +182,20 @@ export default function ATSRankingPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ATSRankingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-green-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 text-green-400 animate-spin mx-auto mb-4" />
+          <p className="text-white">Loading...</p>
+        </div>
+      </div>
+    }>
+      <ATSRankingContent />
+    </Suspense>
   );
 }
