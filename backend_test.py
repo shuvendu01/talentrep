@@ -14,7 +14,7 @@ import csv
 import io
 
 # Get backend URL from frontend .env file
-BACKEND_URL = "https://careerlink-52.preview.emergentagent.com"
+BACKEND_URL = "https://jobvista-1.preview.emergentagent.com"
 API_BASE = f"{BACKEND_URL}/api"
 
 class Colors:
