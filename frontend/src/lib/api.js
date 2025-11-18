@@ -3,7 +3,7 @@ import axios from 'axios';
 // Use the production URL directly since we're having env variable issues
 const API_URL = typeof window !== 'undefined' && window.location.origin 
   ? window.location.origin 
-  : 'https://jobvista-1.preview.emergentagent.com';
+  : 'https://talenthub-10.preview.emergentagent.com';
 
 console.log('API URL:', API_URL);
 

@@ -4,7 +4,7 @@
 
 ### Backend API Test (Confirmed Working)
 ```bash
-curl -X POST https://jobvista-1.preview.emergentagent.com/api/auth/register \
+curl -X POST https://talenthub-10.preview.emergentagent.com/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email": "test@example.com", "role": "jobseeker"}'
 ```
@@ -25,7 +25,7 @@ curl -X POST https://jobvista-1.preview.emergentagent.com/api/auth/register \
 ## How to Register via Frontend
 
 1. **Visit Registration Page:**
-   - Go to: `https://jobvista-1.preview.emergentagent.com/auth/register`
+   - Go to: `https://talenthub-10.preview.emergentagent.com/auth/register`
 
 2. **Fill the Form:**
    - Select Role: Job Seeker, Employer, or Interviewer
