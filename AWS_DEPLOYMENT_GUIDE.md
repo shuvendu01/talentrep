@@ -504,10 +504,10 @@ Before running Certbot, ensure BOTH domains DNS are configured:
    nslookup talenthubapi.bisgensolutions.com
    ```
 
-### 9.3 Obtain SSL Certificate
+### 9.3 Obtain SSL Certificates
 ```bash
-# Obtain certificate
-sudo certbot --nginx -d talenthub.bisgensolutions.com
+# Obtain certificates for BOTH domains
+sudo certbot --nginx -d talenthub.bisgensolutions.com -d talenthubapi.bisgensolutions.com
 
 # Follow prompts:
 # - Enter email address
