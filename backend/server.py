@@ -81,7 +81,17 @@ To get JWT token, call `POST /api/auth/login` with email and password.
     },
     license_info={
         "name": "Proprietary",
-    }
+    },
+    servers=[
+        {
+            "url": "http://localhost:8001",
+            "description": "Development server (Local)"
+        },
+        {
+            "url": "https://talenthubapi.bisgensolutions.com",
+            "description": "Production server (AWS Lightsail)"
+        }
+    ]
 )
 
 # Add CORS middleware FIRST
