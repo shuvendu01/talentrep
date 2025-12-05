@@ -482,18 +482,27 @@ sudo apt install -y certbot python3-certbot-nginx
 ```
 
 ### 9.2 Configure Domain DNS
-Before running Certbot, ensure your domain DNS is configured:
+Before running Certbot, ensure BOTH domains DNS are configured:
 
 1. Go to your domain registrar (GoDaddy, Namecheap, etc.)
-2. Add/Update DNS records:
+2. Add/Update DNS records for BOTH domains:
    ```
    Type: A Record
-   Host: talenthub (or @)
+   Host: talenthub
+   Value: YOUR_LIGHTSAIL_PUBLIC_IP
+   TTL: 3600
+   
+   Type: A Record
+   Host: talenthubapi
    Value: YOUR_LIGHTSAIL_PUBLIC_IP
    TTL: 3600
    ```
 3. Wait 5-10 minutes for DNS propagation
-4. Test DNS: `nslookup talenthub.bisgensolutions.com`
+4. Test DNS for both domains:
+   ```bash
+   nslookup talenthub.bisgensolutions.com
+   nslookup talenthubapi.bisgensolutions.com
+   ```
 
 ### 9.3 Obtain SSL Certificate
 ```bash
