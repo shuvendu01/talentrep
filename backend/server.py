@@ -51,14 +51,25 @@ A comprehensive job portal platform with AI-powered candidate ranking, skill ver
 * 👨‍💼 **Admin Panel** - User management, platform settings, ACL system
 
 ### Authentication:
-Most endpoints require JWT authentication. Include the token in the Authorization header:
+All API requests require two headers:
+1. **API Key** (Required for ALL requests):
+```
+X-API-Key: your-api-key-here
+```
+
+2. **JWT Token** (Required for protected routes):
 ```
 Authorization: Bearer <your_jwt_token>
 ```
 
-### Base URL:
-- Development: `http://localhost:8001/api`
-- Production: `https://talenthub.bisgensolutions.com/api`
+To get JWT token, call `POST /api/auth/login` with email and password.
+
+### Base URLs:
+- **Development:** `http://localhost:8001/api`
+- **Production:** `https://talenthubapi.bisgensolutions.com/api`
+
+### Frontend URL:
+- **Production:** `https://talenthub.bisgensolutions.com`
     """,
     docs_url="/api/docs",
     redoc_url="/api/redoc",
