@@ -546,9 +546,10 @@ tail -f /var/log/talenthub/frontend.out.log
 
 ### 10.2 Test Application
 1. Open browser: `https://talenthub.bisgensolutions.com`
-2. Test API: `https://talenthub.bisgensolutions.com/api/docs`
-3. Register a test user
-4. Login and test functionality
+2. Test API: `https://talenthubapi.bisgensolutions.com/docs`
+3. Test API health: `https://talenthubapi.bisgensolutions.com/health`
+4. Register a test user
+5. Login and test functionality
 
 ---
 
