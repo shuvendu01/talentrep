@@ -161,6 +161,9 @@ api_router.include_router(interviews.router, prefix="/interviews", tags=["Interv
 # Include admin routes
 api_router.include_router(admin.router, prefix="/admin", tags=["Admin"])
 
+# Include session management routes
+api_router.include_router(sessions.router, prefix="/sessions", tags=["Session Management"])
+
 # Include the router in the main app
 app.include_router(api_router)
 
