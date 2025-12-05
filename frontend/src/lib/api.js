@@ -1,28 +1,39 @@
 import axios from 'axios';
 
-// Use the production URL directly since we're having env variable issues
+// Get API URL from environment or use current origin
 const API_URL = typeof window !== 'undefined' && window.location.origin 
   ? window.location.origin 
-  : 'https://talenthub-10.preview.emergentagent.com';
+  : process.env.NEXT_PUBLIC_BACKEND_URL || 'https://talenthub-10.preview.emergentagent.com';
+
+// Get API Key from environment
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY || 'talenthub-api-key-dev-2025-change-in-production';
 
 console.log('API URL:', API_URL);
+console.log('API Key configured:', API_KEY ? 'Yes' : 'No');
 
 const api = axios.create({
   baseURL: `${API_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
+    'X-API-Key': API_KEY, // Add API key to all requests
   },
   withCredentials: false,
   timeout: 30000, // 30 second timeout
 });
 
-// Add auth token to requests
+// Add auth token and API key to requests
 api.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
+      // Add JWT token if available
       const token = localStorage.getItem('authToken');
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
+      }
+      
+      // Ensure API key is always present
+      if (!config.headers['X-API-Key']) {
+        config.headers['X-API-Key'] = API_KEY;
       }
     }
     return config;
