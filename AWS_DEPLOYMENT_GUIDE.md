@@ -457,10 +457,11 @@ server {
 }
 ```
 
-### 8.2 Enable Site
+### 8.2 Enable Sites
 ```bash
-# Create symbolic link
-sudo ln -s /etc/nginx/sites-available/talenthub /etc/nginx/sites-enabled/
+# Create symbolic links for both configurations
+sudo ln -s /etc/nginx/sites-available/talenthub-frontend /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/talenthub-backend /etc/nginx/sites-enabled/
 
 # Remove default site
 sudo rm /etc/nginx/sites-enabled/default
