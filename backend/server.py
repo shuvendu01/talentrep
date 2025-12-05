@@ -20,7 +20,7 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Import routes after setting up database
-from routes import auth, profile, jobs, credits, contact_reveal, interviews, admin
+from routes import auth, profile, jobs, credits, contact_reveal, interviews, admin, sessions
 # Inject database connection into route modules
 auth.db = db
 profile.db = db
@@ -29,6 +29,7 @@ credits.db = db
 contact_reveal.db = db
 interviews.db = db
 admin.db = db
+sessions.db = db
 
 # Create the main app without a prefix
 app = FastAPI(
