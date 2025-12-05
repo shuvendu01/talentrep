@@ -333,20 +333,26 @@ sudo supervisorctl status
 ## 🌐 Step 8: Configure Nginx
 
 ### 8.1 Create Nginx Configuration
+
+We'll configure TWO domains:
+- **Frontend:** https://talenthub.bisgensolutions.com (Next.js on port 3000)
+- **Backend API:** https://talenthubapi.bisgensolutions.com (FastAPI on port 8001)
+
+#### Create Frontend Configuration:
 ```bash
-sudo nano /etc/nginx/sites-available/talenthub
+sudo nano /etc/nginx/sites-available/talenthub-frontend
 ```
 
 **Add this configuration:**
 ```nginx
-# Redirect HTTP to HTTPS
+# Redirect HTTP to HTTPS (Frontend)
 server {
     listen 80;
     server_name talenthub.bisgensolutions.com;
     return 301 https://$server_name$request_uri;
 }
 
-# HTTPS Server
+# HTTPS Server (Frontend)
 server {
     listen 443 ssl http2;
     server_name talenthub.bisgensolutions.com;
@@ -379,9 +385,60 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     }
+}
+```
 
-    # Backend API
-    location /api {
+#### Create Backend API Configuration:
+```bash
+sudo nano /etc/nginx/sites-available/talenthub-backend
+```
+
+**Add this configuration:**
+```nginx
+# Redirect HTTP to HTTPS (Backend API)
+server {
+    listen 80;
+    server_name talenthubapi.bisgensolutions.com;
+    return 301 https://$server_name$request_uri;
+}
+
+# HTTPS Server (Backend API)
+server {
+    listen 443 ssl http2;
+    server_name talenthubapi.bisgensolutions.com;
+
+    # SSL Certificate (will be configured with Certbot)
+    ssl_certificate /etc/letsencrypt/live/talenthubapi.bisgensolutions.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/talenthubapi.bisgensolutions.com/privkey.pem;
+    
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+
+    # Security Headers
+    add_header X-Frame-Options \"SAMEORIGIN\" always;
+    add_header X-Content-Type-Options \"nosniff\" always;
+    add_header X-XSS-Protection \"1; mode=block\" always;
+    add_header Access-Control-Allow-Origin \"https://talenthub.bisgensolutions.com\" always;
+    add_header Access-Control-Allow-Methods \"GET, POST, PUT, DELETE, OPTIONS\" always;
+    add_header Access-Control-Allow-Headers \"X-API-Key, Authorization, Content-Type\" always;
+
+    # Client max body size for file uploads
+    client_max_body_size 10M;
+
+    # Backend API (all routes)
+    location / {
+        # Handle preflight requests
+        if ($request_method = 'OPTIONS') {
+            add_header Access-Control-Allow-Origin \"https://talenthub.bisgensolutions.com\" always;
+            add_header Access-Control-Allow-Methods \"GET, POST, PUT, DELETE, OPTIONS\" always;
+            add_header Access-Control-Allow-Headers \"X-API-Key, Authorization, Content-Type\" always;
+            add_header Access-Control-Max-Age 1728000;
+            add_header Content-Type \"text/plain charset=UTF-8\";
+            add_header Content-Length 0;
+            return 204;
+        }
+
         proxy_pass http://localhost:8001;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
