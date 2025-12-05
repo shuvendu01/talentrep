@@ -30,7 +30,46 @@ interviews.db = db
 admin.db = db
 
 # Create the main app without a prefix
-app = FastAPI(title="TalentHub API", version="1.0.0")
+app = FastAPI(
+    title="TalentHub API",
+    version="1.0.0",
+    description="""
+## TalentHub - Professional Job Portal API
+
+A comprehensive job portal platform with AI-powered candidate ranking, skill verification system, and credit-based economy.
+
+### Features:
+* 🔐 **Multi-role Authentication** - Job Seekers, Employers, Interviewers, Admin
+* 👤 **Profile Management** - Resume upload, skill verification, company profiles
+* 💼 **Job System** - Post jobs, search, apply, manage applications
+* 💰 **Credit Economy** - Signup bonuses, credit transactions, purchase credits
+* 📞 **Contact Reveal** - Employers can reveal candidate contacts (12,000 credits)
+* ⭐ **Interview Verification** - Skill verification through interviews (6,000 credits)
+* 🤖 **ATS Ranking** - AI-powered candidate matching algorithm
+* 👨‍💼 **Admin Panel** - User management, platform settings, ACL system
+
+### Authentication:
+Most endpoints require JWT authentication. Include the token in the Authorization header:
+```
+Authorization: Bearer <your_jwt_token>
+```
+
+### Base URL:
+- Development: `http://localhost:8001/api`
+- Production: `https://talenthub.bisgensolutions.com/api`
+    """,
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json",
+    contact={
+        "name": "TalentHub Support",
+        "url": "https://talenthub.bisgensolutions.com",
+        "email": "contact@bisgensolutions.com"
+    },
+    license_info={
+        "name": "Proprietary",
+    }
+)
 
 # Add CORS middleware FIRST
 app.add_middleware(
