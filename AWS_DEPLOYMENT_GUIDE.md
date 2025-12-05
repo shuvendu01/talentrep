@@ -254,8 +254,8 @@ nano .env
 **Update `.env` with production values:**
 ```env
 # Backend API URL
-NEXT_PUBLIC_BACKEND_URL=https://talenthub.bisgensolutions.com
-REACT_APP_BACKEND_URL=https://talenthub.bisgensolutions.com
+NEXT_PUBLIC_BACKEND_URL=https://talenthubapi.bisgensolutions.com
+REACT_APP_BACKEND_URL=https://talenthubapi.bisgensolutions.com
 
 # API Key (MUST match backend API_KEY)
 NEXT_PUBLIC_API_KEY=\"YOUR_SECURE_API_KEY_HERE\"
