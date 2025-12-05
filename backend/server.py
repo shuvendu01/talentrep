@@ -81,6 +81,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Add API Key middleware (after CORS, before routes)
+# Note: API key validation is optional in development (when API_KEY env is not set)
+app.add_middleware(
+    APIKeyMiddleware,
+    excluded_paths=[
+        "/api/docs",
+        "/api/redoc", 
+        "/api/openapi.json",
+        "/docs",
+        "/redoc",
+        "/openapi.json"
+    ]
+)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
