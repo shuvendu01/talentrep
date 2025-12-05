@@ -756,8 +756,9 @@ ps aux | grep -E \"(uvicorn|node|mongod)\"
 
 Your TalentHub application is now live at:
 - **Frontend**: https://talenthub.bisgensolutions.com
-- **API Docs**: https://talenthub.bisgensolutions.com/api/docs
-- **ReDoc**: https://talenthub.bisgensolutions.com/api/redoc
+- **Backend API**: https://talenthubapi.bisgensolutions.com
+- **API Docs**: https://talenthubapi.bisgensolutions.com/docs
+- **ReDoc**: https://talenthubapi.bisgensolutions.com/redoc
 
 ---
 
